@@ -33,7 +33,10 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 
 <header>
     <h1>PokéNerds December League</h1>
-    <p style="color: white; font-weight: bold;">Huidige Week: <?= $current_week ?> van 5</p>
+    <p style="color: white; font-weight: bold;">
+        Huidige Week: <?= $current_week ?> van 5<br>
+        Loopt van: <?= $week_start_date ?> t/m <?= $week_end_date ?>
+    </p>
 </header>
 
 <div class="container">
@@ -84,7 +87,9 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 
     <?php elseif ($view == 'schedule'): ?>
         <h2>🗓️ Week <?= $current_week ?> Speelschema</h2>
-        <p>Er zijn nog <?= 5 - $current_week ?> weken te gaan na deze week.</p>
+        <p>
+            De wedstrijden voor deze week (<?= $week_start_date ?> t/m <?= $week_end_date ?>):
+        </p>
         
         <?php
         $matches_sql = "SELECT * FROM matches WHERE week = ? ORDER BY id ASC";

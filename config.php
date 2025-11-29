@@ -8,8 +8,8 @@ define('DB_PASS', '$NA!6qri2eQn7eoq');
 define('DB_NAME', 'poketournament_');
 
 // League Configuration
-// The league starts on the week of December 1st (Monday start of week)
-define('LEAGUE_START_DATE', '2025-12-01');
+// De competitie start op de week van 1 december. Dit moet een datum in het verleden of heden zijn.
+define('LEAGUE_START_DATE', '2025-12-01'); // 1 december 2025 is een maandag
 
 // Connect to Database
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -18,28 +18,54 @@ if ($conn->connect_error) {
 }
 
 /**
- * Calculates the current week number based on the start date.
- * Week 1 starts on LEAGUE_START_DATE.
- * * @return int The current week number (1 to 5).
+ * Berekent het huidige weeknummer en het datumbereik voor die week.
+ * De competitie duurt maximaal 5 weken.
+ * @return array{week_number: int, start_date: string, end_date: string}
  */
-function calculate_current_week() {
-    $start_date = new DateTime(LEAGUE_START_DATE);
+function get_week_info() {
+    $start_date_str = LEAGUE_START_DATE;
+    $start_date_obj = new DateTime($start_date_str);
     $current_date = new DateTime();
 
-    // Set the start date to the beginning of its week (Monday)
-    // 1=Mon, 7=Sun. We assume a Monday start.
-    if ($start_date->format('N') != 1) {
-        $start_date->modify('last Monday');
+    // 1. Zorg ervoor dat de startdatum het begin van de Week 1 (Maandag) is.
+    // 1=Maandag. Als de startdatum geen Maandag is, gaan we terug naar de laatste Maandag.
+    if ($start_date_obj->format('N') != 1) {
+        $start_date_obj->modify('last Monday');
+    }
+    
+    // 2. Bereken het verschil in dagen sinds de start van Week 1 (op maandag)
+    $diff = $start_date_obj->diff($current_date);
+    $days_since_start_monday = $diff->days;
+    
+    // Als de huidige datum vóór de startdatum ligt, behandelen we dit als Week 1 (in afwachting)
+    if ($current_date < $start_date_obj) {
+        $days_since_start_monday = 0; 
     }
 
-    $interval = $start_date->diff($current_date);
-    $days_since_start = $interval->days;
+    // 3. Bereken het huidige weeknummer
+    // (Dagen / 7) + 1 voor de eerste week
+    $week_number = floor($days_since_start_monday / 7) + 1;
 
-    // Calculate the week number (integer division by 7, plus 1 for Week 1)
-    $week_number = floor($days_since_start / 7) + 1;
+    // Beperk tot maximaal 5 weken
+    $max_weeks = 5;
+    $week_number = min($week_number, $max_weeks);
 
-    // League has 5 rounds max
-    return min($week_number, 5);
+    // 4. Bereken het datumbereik voor de bepaalde week
+    // Tel (weeknummer - 1) * 7 dagen op bij de basis startdatum
+    $week_start_obj = clone $start_date_obj;
+    $week_start_obj->modify('+' . ($week_number - 1) * 7 . ' days');
+    
+    $week_end_obj = clone $week_start_obj;
+    $week_end_obj->modify('+6 days'); // Week eindigt 6 dagen later (zondag)
+
+    return [
+        'week_number' => $week_number,
+        'start_date' => $week_start_obj->format('d/m/Y'),
+        'end_date' => $week_end_obj->format('d/m/Y'),
+    ];
 }
 
-$current_week = calculate_current_week();
+$week_info = get_week_info();
+$current_week = $week_info['week_number'];
+$week_start_date = $week_info['start_date'];
+$week_end_date = $week_info['end_date'];
