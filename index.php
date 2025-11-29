@@ -153,7 +153,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
             </div>
 
             <input type="hidden" name="log_result" value="1">
-            <button type="submit">Log Resultaat! (Gotta Catch 'Em All!)</button>
+            <button type="submit">Log Resultaat!</button>
         </form>
 
     <?php endif; ?>
