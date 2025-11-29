@@ -1,0 +1,161 @@
+/* style.css */
+:root {
+    --poke-blue: #3b4cca; /* Classic Blue */
+    --poke-red: #cc0000; /* Classic Red */
+    --poke-yellow: #ffde00; /* Accent Yellow */
+    --poke-white: #ffffff;
+    --poke-black: #222222;
+    --poke-grey: #f0f0f0; /* Background Panel */
+    --poke-green: #2a75bb; /* Box Border */
+    --poke-font: 'Press Start 2P', monospace; /* Use a pixel font if available, or a fallback */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--poke-blue) url('background_pattern.png'); /* Use a subtle pattern if desired */
+    color: var(--poke-black);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+header {
+    background-color: var(--poke-red);
+    color: var(--poke-yellow);
+    padding: 15px 10px;
+    text-align: center;
+    border-bottom: 5px solid var(--poke-black);
+}
+
+h1, h2 {
+    font-family: var(--poke-font);
+    text-shadow: 2px 2px var(--poke-black);
+    color: var(--poke-yellow);
+    margin-top: 0;
+}
+
+/* Main Content Area - The "Pokedex" Frame */
+.container {
+    max-width: 95%; /* Mobile-friendly width */
+    margin: 20px auto;
+    padding: 15px;
+    background: var(--poke-white);
+    border: 8px solid var(--poke-green);
+    border-radius: 10px;
+    box-shadow: 0 0 0 5px var(--poke-black), 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Tabs/Navigation */
+.nav-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.nav-tabs a {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    background: var(--poke-grey);
+    border: 3px solid var(--poke-black);
+    text-decoration: none;
+    color: var(--poke-black);
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0 5px;
+    transition: background-color 0.2s;
+}
+
+.nav-tabs a.active, .nav-tabs a:hover {
+    background: var(--poke-yellow);
+    color: var(--poke-red);
+}
+
+/* Leaderboard Table */
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.leaderboard th, .leaderboard td {
+    padding: 8px 5px;
+    border: 2px solid var(--poke-black);
+    text-align: left;
+}
+
+.leaderboard th {
+    background-color: var(--poke-blue);
+    color: var(--poke-white);
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.leaderboard tr:nth-child(even) {
+    background-color: var(--poke-grey);
+}
+
+/* Buttons and Form Elements */
+.button, button, input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: var(--poke-red);
+    color: var(--poke-white);
+    border: 4px solid var(--poke-black);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--poke-font);
+    font-size: 16px;
+    box-shadow: 3px 3px 0 var(--poke-black);
+    transition: background-color 0.1s;
+}
+
+.button:hover, button:hover, input[type="submit"]:hover {
+    background-color: var(--poke-yellow);
+    color: var(--poke-black);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group select, .form-group input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    border: 2px solid var(--poke-black);
+    border-radius: 3px;
+}
+
+/* Schedule Card */
+.schedule-card {
+    background: var(--poke-yellow);
+    border: 4px solid var(--poke-black);
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+    .leaderboard th, .leaderboard td {
+        font-size: 10px; /* Make text smaller to fit more columns */
+        padding: 5px 3px;
+    }
+    .leaderboard th:nth-child(2), .leaderboard td:nth-child(2) {
+        min-width: 70px; /* Ensure player name is readable */
+    }
+}

@@ -25,14 +25,14 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Jow Nerds League</title>
+    <title>PokéNerds December League</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>Pokémon Jow Nerds League</h1>
+    <h1>PokéNerds December League</h1>
     <p style="color: white; font-weight: bold;">Huidige Week: <?= $current_week ?> van 5</p>
 </header>
 
