@@ -48,7 +48,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 
     <?php if (isset($error) && $error !== null): ?>
         <div style="color: var(--poke-red); border: 2px solid var(--poke-red); padding: 10px; margin-bottom: 15px; font-weight: bold;">
-            ⚠️ **Fout:** <?= htmlspecialchars($error) ?>
+            ⚠️ Fout: <?= htmlspecialchars($error) ?>
         </div>
     <?php endif; ?>
 
@@ -75,7 +75,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
                     <tr>
                         <td><?= $rank++ ?></td>
                         <td><?= htmlspecialchars($row['name']) ?></td>
-                        <td>**<?= $row['points'] ?>**</td>
+                        <td><?= $row['points'] ?></td>
                         <td><?= $row['wins'] ?>-<?= $row['losses'] ?>-<?= $row['draws'] ?></td>
                         <td><?= $row['games_won'] ?>-<?= $row['games_lost'] ?></td>
                         <td><?= $row['game_diff'] ?></td>
@@ -105,11 +105,11 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         while($match = $result->fetch_assoc()):
             $status_color = $match['is_played'] ? 'green' : 'red';
             $status_text = $match['is_played'] ? 
-                           "✅ GESPEELD: **" . $match['p1_games_won'] . "-" . $match['p2_games_won'] . "**" : 
+                           "✅ GESPEELD: " . $match['p1_games_won'] . "-" . $match['p2_games_won'] . "" : 
                            "❌ OPEN";
         ?>
         <div class="schedule-card" style="border-color: <?= $status_color ?>;">
-            <p style="margin: 0;">**<?= htmlspecialchars($match['player1_name']) ?>** vs. **<?= htmlspecialchars($match['player2_name']) ?>**</p>
+            <p style="margin: 0;"><?= htmlspecialchars($match['player1_name']) ?> vs. <?= htmlspecialchars($match['player2_name']) ?></p>
             <small><?= $status_text ?></small>
         </div>
         <?php endwhile; $stmt->close(); ?>
