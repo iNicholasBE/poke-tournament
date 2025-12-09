@@ -4,27 +4,27 @@
 // Round Robin Schedule (5 Weeks)
 $schedule = [
     1 => [
-        ['Zeeman', 'Nxken'],
+        ['Wikit_wikit', 'Nxken'],
         ['AlvenBleken', 'Wasmachien1337'],
         ['MattiLeMattiBE', 'P4ulfiction'],
     ],
     2 => [
-        ['Zeeman', 'AlvenBleken'],
+        ['Wikit_wikit', 'AlvenBleken'],
         ['Nxken', 'P4ulfiction'], 
         ['Wasmachien1337', 'MattiLeMattiBE'],
     ],
     3 => [
-        ['Zeeman', 'MattiLeMattiBE'],
+        ['Wikit_wikit', 'MattiLeMattiBE'],
         ['P4ulfiction', 'Wasmachien1337'],
         ['AlvenBleken', 'Nxken'],
     ],
     4 => [
-        ['Zeeman', 'P4ulfiction'],
+        ['Wikit_wikit', 'P4ulfiction'],
         ['Wasmachien1337', 'Nxken'],
         ['MattiLeMattiBE', 'AlvenBleken'],
     ],
     5 => [
-        ['Zeeman', 'Wasmachien1337'],
+        ['Wikit_wikit', 'Wasmachien1337'],
         ['AlvenBleken', 'P4ulfiction'],
         ['Nxken', 'MattiLeMattiBE'],
     ],
