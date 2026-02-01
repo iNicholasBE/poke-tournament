@@ -1,195 +1,494 @@
-/* style.css */
+/* style.css - Mega Evolution Inspired Theme */
+
+/* ===== COLOR PALETTE (TCG Inspired) ===== */
 :root {
-    --poke-blue: #3b4cca; /* Classic Blue */
-    --poke-red: #cc0000; /* Classic Red */
-    --poke-yellow: #ffde00; /* Accent Yellow */
-    --poke-white: #ffffff;
-    --poke-black: #222222;
-    --poke-grey: #f0f0f0; /* Background Panel */
-    --poke-green: #2a75bb; /* Box Border */
-    --poke-font: 'Press Start 2P', monospace; /* Use a pixel font if available, or a fallback */
+    /* Gold/Premium tones */
+    --gold-light: #fbf0bd;
+    --gold-mid: #ceb664;
+    --gold-dark: #836722;
+    --gold-btn: #e2ba65;
+    --gold: #deaf4f;
+    --gold-banner: #efe48c;
+
+    /* Core colors */
+    --color-black: #131415;
+    --color-white: #ffffff;
+    --color-gray: #ededed;
+    --color-yellow: #fef33d;
+    --color-dark-teal: #003E59;
+    --color-light-blue: #C6E7F7;
+
+    /* Vibrant Pokemon colors */
+    --color-red: #DD4E47;
+    --color-blue: #2D6EB5;
+    --color-turquoise: #00A8B9;
+    --color-green: #10A456;
+    --color-green-light: #9BC56F;
+    --color-purple: #371C50;
+    --color-purple-light: #6C3688;
+    --color-pink: #C43876;
+    --color-pink-light: #E48DB5;
+
+    /* Gradients */
+    --gold-gradient: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    --metallic-gradient: linear-gradient(30deg, #969AA1 25%, #fff 50%, #969AA1 95%);
+    --button-gradient: linear-gradient(180deg, var(--gold-btn) 0%, var(--gold-dark) 100%);
+    --tcgl-gradient: linear-gradient(180deg, rgb(25, 27, 29) 0%, rgb(71, 78, 79) 100%);
+
+    /* Fonts */
+    --font-heading: 'Press Start 2P', monospace;
+    --font-body: 'Kanit', 'Segoe UI', sans-serif;
+}
+
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,700;1,700&family=Press+Start+2P&display=swap');
+
+/* ===== BASE STYLES ===== */
+* {
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: var(--poke-blue) url('background_pattern.png'); /* Use a subtle pattern if desired */
-    color: var(--poke-black);
+    font-family: var(--font-body);
+    background: var(--color-purple);
+    background-image:
+        radial-gradient(ellipse at center, var(--color-purple-light) 0%, transparent 70%),
+        linear-gradient(180deg, var(--color-purple) 0%, var(--color-black) 100%);
+    background-attachment: fixed;
+    color: var(--color-black);
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Header & Navigation */
+/* Animated background pattern */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236C3688' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
 header {
-    background-color: var(--poke-red);
-    color: var(--poke-yellow);
-    padding: 15px 10px;
+    background: var(--tcgl-gradient);
+    color: var(--color-white);
+    padding: 20px 15px;
     text-align: center;
-    border-bottom: 5px solid var(--poke-black);
+    border-bottom: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
 }
 
-h1, h2 {
-    font-family: var(--poke-font);
-    text-shadow: 2px 2px var(--poke-black);
-    color: var(--poke-yellow);
-    margin-top: 0;
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gold-gradient);
 }
 
-/* Main Content Area - The "Pokedex" Frame */
+header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+    pointer-events: none;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 5vw, 28px);
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(14px, 4vw, 20px);
+    color: var(--gold);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== MAIN CONTAINER ===== */
 .container {
-    max-width: 95%; /* Mobile-friendly width */
+    max-width: 95%;
     margin: 20px auto;
-    padding: 15px;
-    background: var(--poke-white);
-    border: 8px solid var(--poke-green);
-    border-radius: 10px;
-    box-shadow: 0 0 0 5px var(--poke-black), 0 15px 30px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray) 100%);
+    border: none;
+    border-radius: 16px;
+    box-shadow:
+        0 0 0 3px var(--gold),
+        0 0 0 6px var(--color-black),
+        0 20px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
 }
 
-/* Tabs/Navigation */
+.container::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: var(--gold-gradient);
+    border-radius: 18px;
+    z-index: -1;
+}
+
+/* ===== NAVIGATION TABS ===== */
 .nav-tabs {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .nav-tabs a {
-    flex-grow: 1;
+    flex: 1;
+    min-width: 80px;
     text-align: center;
-    padding: 10px;
-    background: var(--poke-grey);
-    border: 3px solid var(--poke-black);
+    padding: 12px 8px;
+    background: linear-gradient(180deg, #e8e8e8 0%, #d0d0d0 100%);
+    border: 2px solid var(--color-black);
+    border-radius: 8px;
     text-decoration: none;
-    color: var(--poke-black);
-    font-weight: bold;
-    font-size: 14px;
-    margin: 0 5px;
-    transition: background-color 0.2s;
+    color: var(--color-black);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.nav-tabs a.active, .nav-tabs a:hover {
-    background: var(--poke-yellow);
-    color: var(--poke-red);
+.nav-tabs a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, var(--gold-btn) 0%, var(--gold-dark) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
-/* Leaderboard Table */
+.nav-tabs a span,
+.nav-tabs a {
+    position: relative;
+    z-index: 1;
+}
+
+.nav-tabs a.active,
+.nav-tabs a:hover {
+    color: var(--color-black);
+    border-color: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(222, 175, 79, 0.4);
+}
+
+.nav-tabs a.active::before,
+.nav-tabs a:hover::before {
+    opacity: 1;
+}
+
+/* ===== LEADERBOARD TABLE ===== */
 .leaderboard table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     font-size: 14px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.leaderboard th, .leaderboard td {
-    padding: 8px 5px;
-    border: 2px solid var(--poke-black);
+.leaderboard th,
+.leaderboard td {
+    padding: 12px 8px;
     text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .leaderboard th {
-    background-color: var(--poke-blue);
-    color: var(--poke-white);
+    background: var(--tcgl-gradient);
+    color: var(--color-white);
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.leaderboard th::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold-gradient);
 }
 
 .leaderboard tr:nth-child(even) {
-    background-color: var(--poke-grey);
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* Buttons and Form Elements */
-.button, button, input[type="submit"] {
+.leaderboard tr:hover {
+    background-color: rgba(222, 175, 79, 0.1);
+}
+
+/* Top 3 styling */
+.leaderboard tbody tr:nth-child(1) td:first-child {
+    position: relative;
+}
+
+.leaderboard tbody tr:nth-child(1) td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #ffd700, #ffec8b);
+}
+
+.leaderboard tbody tr:nth-child(2) td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #c0c0c0, #e8e8e8);
+}
+
+.leaderboard tbody tr:nth-child(3) td:first-child::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #cd7f32, #daa06d);
+}
+
+/* ===== BUTTONS & FORM ELEMENTS ===== */
+.button,
+button,
+input[type="submit"] {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: var(--poke-red);
-    color: var(--poke-white);
-    border: 4px solid var(--poke-black);
-    border-radius: 5px;
+    padding: 14px 20px;
+    margin: 12px 0;
+    background: linear-gradient(180deg, var(--color-red) 0%, #b91c1c 100%);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    font-family: var(--poke-font);
+    font-family: var(--font-body);
     font-size: 16px;
-    box-shadow: 3px 3px 0 var(--poke-black);
-    transition: background-color 0.1s;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow:
+        0 4px 15px rgba(221, 78, 71, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.button:hover, button:hover, input[type="submit"]:hover {
-    background-color: var(--poke-yellow);
-    color: var(--poke-black);
+.button::before,
+button::before,
+input[type="submit"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, var(--gold-btn) 0%, var(--gold-dark) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 20px rgba(221, 78, 71, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.button:hover::before,
+button:hover::before,
+input[type="submit"]:hover::before {
+    opacity: 1;
+}
+
+.button span,
+button span {
+    position: relative;
+    z-index: 1;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group select, .form-group input {
-    width: calc(100% - 10px);
-    padding: 8px;
-    border: 2px solid var(--poke-black);
-    border-radius: 3px;
-}
-
-/* Schedule Card */
-.schedule-card {
-    background: var(--poke-yellow);
-    border: 4px solid var(--poke-black);
-    padding: 15px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 5px;
-}
-
-/* Bye Card */
-.bye-card {
-    background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 50%, #e0e0e0 100%);
-    border: 3px dashed var(--poke-blue);
-    padding: 12px;
-    margin-bottom: 20px;
-    text-align: center;
-    border-radius: 5px;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--color-black);
     font-size: 14px;
 }
 
-/* Upcoming Matches Section */
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #d0d0d0;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    background: var(--color-white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(222, 175, 79, 0.2);
+}
+
+/* ===== SCHEDULE CARD ===== */
+.schedule-card {
+    background: linear-gradient(135deg, var(--gold-banner) 0%, var(--gold-light) 50%, var(--gold-banner) 100%);
+    border: 3px solid var(--gold-dark);
+    padding: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow:
+        0 4px 15px rgba(222, 175, 79, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.schedule-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+    );
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+/* ===== BYE CARD ===== */
+.bye-card {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-white) 50%, var(--color-gray) 100%);
+    border: 2px dashed var(--color-turquoise);
+    padding: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--color-dark-teal);
+}
+
+/* ===== UPCOMING MATCHES SECTION ===== */
 .upcoming-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 3px solid var(--poke-grey);
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 2px solid var(--color-gray);
+    position: relative;
+}
+
+.upcoming-section::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--gold-gradient);
 }
 
 .upcoming-section h3 {
-    font-family: var(--poke-font);
-    color: var(--poke-blue);
-    font-size: 16px;
-    margin-bottom: 15px;
+    font-family: var(--font-heading);
+    color: var(--color-purple);
+    font-size: 14px;
+    margin-bottom: 18px;
     text-align: center;
 }
 
 .upcoming-week {
-    background: var(--poke-grey);
-    border: 2px solid var(--poke-black);
-    border-radius: 5px;
-    padding: 12px;
-    margin-bottom: 12px;
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray) 100%);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .upcoming-week h4 {
-    font-family: var(--poke-font);
-    font-size: 12px;
-    color: var(--poke-red);
-    margin: 0 0 8px 0;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    color: var(--color-red);
+    margin: 0 0 10px 0;
 }
 
 .upcoming-bye {
     font-size: 12px;
-    color: var(--poke-blue);
+    color: var(--color-turquoise);
     margin: 5px 0;
     font-style: italic;
 }
@@ -201,89 +500,187 @@ h1, h2 {
 }
 
 .upcoming-week li {
-    padding: 5px 0;
+    padding: 8px 0;
     font-size: 13px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .upcoming-week li:last-child {
     border-bottom: none;
 }
 
-/* Hall of Fame */
+/* ===== HALL OF FAME ===== */
 .hall-of-fame {
     text-align: center;
 }
 
 .season-block {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .season-block h3 {
-    font-family: var(--poke-font);
-    color: var(--poke-blue);
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    color: var(--color-purple);
+    font-size: 16px;
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+}
+
+.season-block h3::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: var(--gold-gradient);
 }
 
 .champion-card {
-    background: linear-gradient(135deg, #ffd700 0%, #ffec8b 50%, #ffd700 100%);
-    border: 4px solid var(--poke-black);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 15px auto;
-    max-width: 300px;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    background:
+        linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 236, 139, 0.9) 50%, rgba(255, 215, 0, 0.9) 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 320px;
+    box-shadow:
+        0 0 0 3px var(--gold-dark),
+        0 8px 30px rgba(255, 215, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.champion-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 60%
+    );
+    animation: shimmer 4s infinite;
 }
 
 .champion-title {
-    font-family: var(--poke-font);
-    font-size: 14px;
-    color: var(--poke-black);
-    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+    position: relative;
 }
 
 .champion-name {
-    font-family: var(--poke-font);
-    font-size: 20px;
-    color: var(--poke-red);
-    text-shadow: 1px 1px 0 var(--poke-black);
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--color-black);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    position: relative;
 }
 
 .magikarp-card {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa07a 50%, #ff6b6b 100%);
-    border: 4px solid var(--poke-black);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 15px auto;
-    max-width: 300px;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    background: linear-gradient(135deg, var(--color-pink) 0%, var(--color-pink-light) 50%, var(--color-pink) 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 320px;
+    box-shadow:
+        0 0 0 3px var(--color-purple),
+        0 8px 30px rgba(196, 56, 118, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
 .magikarp-title {
-    font-family: var(--poke-font);
-    font-size: 14px;
-    color: var(--poke-black);
-    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    color: var(--color-white);
+    margin-bottom: 12px;
+    opacity: 0.9;
 }
 
 .magikarp-name {
-    font-family: var(--poke-font);
-    font-size: 20px;
-    color: var(--poke-white);
-    text-shadow: 1px 1px 0 var(--poke-black);
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--color-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile Adjustments */
+/* ===== MOBILE ADJUSTMENTS ===== */
 @media (max-width: 600px) {
     h1 {
-        font-size: 24px;
+        font-size: 18px;
     }
-    .leaderboard th, .leaderboard td {
-        font-size: 10px; /* Make text smaller to fit more columns */
-        padding: 5px 3px;
+
+    .leaderboard th,
+    .leaderboard td {
+        font-size: 10px;
+        padding: 8px 4px;
     }
-    .leaderboard th:nth-child(2), .leaderboard td:nth-child(2) {
-        min-width: 70px; /* Ensure player name is readable */
+
+    .leaderboard th:nth-child(2),
+    .leaderboard td:nth-child(2) {
+        min-width: 70px;
+    }
+
+    .nav-tabs a {
+        font-size: 11px;
+        padding: 10px 6px;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-gold {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shimmer-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-effect::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmerSlide 2s infinite;
+}
+
+@keyframes shimmerSlide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .schedule-card::before,
+    .champion-card::before,
+    .shimmer-effect::after {
+        animation: none;
     }
 }
