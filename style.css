@@ -146,6 +146,70 @@ h1, h2 {
     border-radius: 5px;
 }
 
+/* Hall of Fame */
+.hall-of-fame {
+    text-align: center;
+}
+
+.season-block {
+    margin-bottom: 30px;
+}
+
+.season-block h3 {
+    font-family: var(--poke-font);
+    color: var(--poke-blue);
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.champion-card {
+    background: linear-gradient(135deg, #ffd700 0%, #ffec8b 50%, #ffd700 100%);
+    border: 4px solid var(--poke-black);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 300px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+}
+
+.champion-title {
+    font-family: var(--poke-font);
+    font-size: 14px;
+    color: var(--poke-black);
+    margin-bottom: 10px;
+}
+
+.champion-name {
+    font-family: var(--poke-font);
+    font-size: 20px;
+    color: var(--poke-red);
+    text-shadow: 1px 1px 0 var(--poke-black);
+}
+
+.magikarp-card {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa07a 50%, #ff6b6b 100%);
+    border: 4px solid var(--poke-black);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px auto;
+    max-width: 300px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.magikarp-title {
+    font-family: var(--poke-font);
+    font-size: 14px;
+    color: var(--poke-black);
+    margin-bottom: 10px;
+}
+
+.magikarp-name {
+    font-family: var(--poke-font);
+    font-size: 20px;
+    color: var(--poke-white);
+    text-shadow: 1px 1px 0 var(--poke-black);
+}
+
 /* Mobile Adjustments */
 @media (max-width: 600px) {
     h1 {

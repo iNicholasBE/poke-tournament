@@ -1,31 +1,49 @@
 <?php
 // schedule_data.php
 
-// Round Robin Schedule (5 Weeks)
+// Round Robin Schedule (7 Weeks for 7 Trainers)
+// Each week has 3 matches, one trainer has a bye
 $schedule = [
     1 => [
-        ['Wikit_wikit', 'Nxken'],
-        ['AlvenBleken', 'Wasmachien1337'],
-        ['MattiLeMattiBE', 'P4ulfiction'],
-    ],
-    2 => [
-        ['Wikit_wikit', 'AlvenBleken'],
-        ['Nxken', 'P4ulfiction'], 
+        // Bye: Wikit_wikit
+        ['Nxken', 'PVG'],
+        ['AlvenBleken', 'P4ulfiction'],
         ['Wasmachien1337', 'MattiLeMattiBE'],
     ],
+    2 => [
+        // Bye: P4ulfiction
+        ['Wikit_wikit', 'PVG'],
+        ['Nxken', 'MattiLeMattiBE'],
+        ['AlvenBleken', 'Wasmachien1337'],
+    ],
     3 => [
-        ['Wikit_wikit', 'MattiLeMattiBE'],
-        ['P4ulfiction', 'Wasmachien1337'],
-        ['AlvenBleken', 'Nxken'],
+        // Bye: Wasmachien1337
+        ['Wikit_wikit', 'P4ulfiction'],
+        ['PVG', 'MattiLeMattiBE'],
+        ['Nxken', 'AlvenBleken'],
     ],
     4 => [
-        ['Wikit_wikit', 'P4ulfiction'],
-        ['Wasmachien1337', 'Nxken'],
-        ['MattiLeMattiBE', 'AlvenBleken'],
+        // Bye: Nxken
+        ['Wikit_wikit', 'MattiLeMattiBE'],
+        ['P4ulfiction', 'Wasmachien1337'],
+        ['PVG', 'AlvenBleken'],
     ],
     5 => [
+        // Bye: PVG
         ['Wikit_wikit', 'Wasmachien1337'],
-        ['AlvenBleken', 'P4ulfiction'],
-        ['Nxken', 'MattiLeMattiBE'],
+        ['MattiLeMattiBE', 'AlvenBleken'],
+        ['P4ulfiction', 'Nxken'],
+    ],
+    6 => [
+        // Bye: MattiLeMattiBE
+        ['Wikit_wikit', 'AlvenBleken'],
+        ['Wasmachien1337', 'Nxken'],
+        ['P4ulfiction', 'PVG'],
+    ],
+    7 => [
+        // Bye: AlvenBleken
+        ['Wikit_wikit', 'Nxken'],
+        ['Wasmachien1337', 'PVG'],
+        ['MattiLeMattiBE', 'P4ulfiction'],
     ],
 ];

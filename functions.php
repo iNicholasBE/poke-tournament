@@ -46,21 +46,22 @@ function handle_log_result($conn, $current_week) {
     $p1_games = (int)$_POST['p1_games'];
     $p2_games = (int)$_POST['p2_games'];
 
-    // 1. Validation (Must be a 2-0 or 2-1 result)
-    if (($p1_games !== 2 && $p2_games !== 2) || ($p1_games > 2 || $p2_games > 2)) {
-        return "Ongeldig resultaat. Een van de spelers moet 2 games gewonnen hebben (2-0 of 2-1).";
+    // 1. Validation (Must be a 3-0 or 2-1 result - always 3 games played)
+    $total_games = $p1_games + $p2_games;
+    if ($total_games !== 3 || ($p1_games < 2 && $p2_games < 2)) {
+        return "Ongeldig resultaat. Er moeten 3 games gespeeld zijn (3-0 of 2-1).";
     }
 
     // 2. Fetch Match Details & Check if already played
-    $stmt = $conn->prepare("SELECT player1_name, player2_name, is_played FROM matches WHERE id = ? AND week = ?");
-    $stmt->bind_param("ii", $match_id, $current_week);
+    $stmt = $conn->prepare("SELECT player1_name, player2_name, is_played FROM matches WHERE id = ?");
+    $stmt->bind_param("i", $match_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $match = $result->fetch_assoc();
     $stmt->close();
 
     if (!$match || $match['is_played']) {
-        return "Fout: Match niet gevonden of al gespeeld, of behoort niet tot Week " . $current_week . ".";
+        return "Fout: Match niet gevonden of al gespeeld.";
     }
 
     $player1 = $match['player1_name'];
@@ -71,15 +72,15 @@ function handle_log_result($conn, $current_week) {
     $p2_wins = 0; $p2_losses = 0;
     $draw = 0;
 
-    // 3. Apply Point System Logic
-    if ($p1_games == 2) { // P1 Wins Match
+    // 3. Apply Point System Logic (3-0 or 2-1 format)
+    if ($p1_games >= 2) { // P1 Wins Match (3-0 or 2-1)
         $p1_wins = 1; $p2_losses = 1;
         $p1_points = 3;
-        $p2_points = ($p2_games == 1) ? 1 : 0; // P2 gets 1 point for 2-1 loss, 0 for 2-0 loss
-    } elseif ($p2_games == 2) { // P2 Wins Match
+        $p2_points = ($p2_games == 1) ? 1 : 0; // P2 gets 1 point for 2-1 loss, 0 for 3-0 loss
+    } elseif ($p2_games >= 2) { // P2 Wins Match (3-0 or 2-1)
         $p2_wins = 1; $p1_losses = 1;
         $p2_points = 3;
-        $p1_points = ($p1_games == 1) ? 1 : 0; // P1 gets 1 point for 1-2 loss, 0 for 0-2 loss
+        $p1_points = ($p1_games == 1) ? 1 : 0; // P1 gets 1 point for 1-2 loss, 0 for 0-3 loss
     }
     
     // 4. Update Matches Table (Transactionally better, but simple UPDATE for now)

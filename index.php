@@ -25,16 +25,16 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokéNerds December League</title>
+    <title>PokéNerds Tournament - Season 2</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>PokéNerds December League</h1>
+    <h1>PokéNerds Tournament - Season 2</h1>
     <p style="color: white; font-weight: bold;">
-        Huidige Week: <?= $current_week ?> van 5<br>
+        Huidige Week: <?= $current_week ?> van 7<br>
         Loopt van: <?= $week_start_date ?> t/m <?= $week_end_date ?>
     </p>
 </header>
@@ -44,6 +44,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         <a href="?view=leaderboard" class="<?= $view == 'leaderboard' ? 'active' : '' ?>">🏆 Stand</a>
         <a href="?view=schedule" class="<?= $view == 'schedule' ? 'active' : '' ?>">🗓️ Schema</a>
         <a href="?view=log_match" class="<?= $view == 'log_match' ? 'active' : '' ?>">✅ Resultaat</a>
+        <a href="?view=hall_of_fame" class="<?= $view == 'hall_of_fame' ? 'active' : '' ?>">👑 Hall of Fame</a>
     </div>
 
     <?php if (isset($error) && $error !== null): ?>
@@ -115,46 +116,60 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         <?php endwhile; $stmt->close(); ?>
 
     <?php elseif ($view == 'log_match'): ?>
-        <h2>✅ Log Resultaat (Week <?= $current_week ?>)</h2>
+        <h2>✅ Log Resultaat</h2>
         <form method="POST">
             <div class="form-group">
                 <label for="match_id">Selecteer Match:</label>
                 <select name="match_id" id="match_id" required>
                     <option value="">-- Kies een open match --</option>
                     <?php
-                    $log_sql = "SELECT id, player1_name, player2_name FROM matches WHERE week = ? AND is_played = FALSE";
-                    $stmt = $conn->prepare($log_sql);
-                    $stmt->bind_param("i", $current_week);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    
+                    $log_sql = "SELECT id, week, player1_name, player2_name FROM matches WHERE is_played = FALSE ORDER BY week ASC, id ASC";
+                    $result = $conn->query($log_sql);
+
                     if ($result->num_rows == 0) {
-                        echo "<option disabled>Alle matches voor deze week zijn gelogd!</option>";
+                        echo "<option disabled>Alle matches zijn gelogd!</option>";
                     } else {
                         while($match = $result->fetch_assoc()):
                     ?>
                     <option value="<?= $match['id'] ?>">
-                        <?= htmlspecialchars($match['player1_name']) ?> vs. <?= htmlspecialchars($match['player2_name']) ?>
+                        Week <?= $match['week'] ?>: <?= htmlspecialchars($match['player1_name']) ?> vs. <?= htmlspecialchars($match['player2_name']) ?>
                     </option>
-                    <?php endwhile; } $stmt->close(); ?>
+                    <?php endwhile; } ?>
                 </select>
             </div>
 
-            <p style="text-align: center; font-weight: bold; margin: 15px 0;">Games Gewonnen (Best-of-3)</p>
-            
+            <p style="text-align: center; font-weight: bold; margin: 15px 0;">Games Gewonnen (3 games)</p>
+
             <div class="form-group">
                 <label for="p1_games">Games gewonnen door Speler 1 (Eerste in selectie):</label>
-                <input type="number" name="p1_games" id="p1_games" min="0" max="2" required>
+                <input type="number" name="p1_games" id="p1_games" min="0" max="3" required>
             </div>
 
             <div class="form-group">
                 <label for="p2_games">Games gewonnen door Speler 2 (Tweede in selectie):</label>
-                <input type="number" name="p2_games" id="p2_games" min="0" max="2" required>
+                <input type="number" name="p2_games" id="p2_games" min="0" max="3" required>
             </div>
 
             <input type="hidden" name="log_result" value="1">
             <button type="submit">Log Resultaat!</button>
         </form>
+
+    <?php elseif ($view == 'hall_of_fame'): ?>
+        <h2>👑 Poké Tournament Champions</h2>
+
+        <div class="hall-of-fame">
+            <div class="season-block">
+                <h3>Season 1</h3>
+                <div class="champion-card">
+                    <div class="champion-title">🏆 Champion</div>
+                    <div class="champion-name">Nxken</div>
+                </div>
+                <div class="magikarp-card">
+                    <div class="magikarp-title">🐟 Magikarp Award</div>
+                    <div class="magikarp-name">P4ulfiction</div>
+                </div>
+            </div>
+        </div>
 
     <?php endif; ?>
 </div>

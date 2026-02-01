@@ -8,8 +8,8 @@ define('DB_PASS', '$NA!6qri2eQn7eoq');
 define('DB_NAME', 'poketournament_');
 
 // League Configuration
-// De competitie start op de week van 1 december. Dit moet een datum in het verleden of heden zijn.
-define('LEAGUE_START_DATE', '2025-12-01'); // 1 december 2025 is een maandag
+// De competitie start op de eerste week. Dit moet een datum in het verleden of heden zijn.
+define('LEAGUE_START_DATE', '2026-02-03'); // Season 2 start: 3 februari 2026 (maandag)
 
 // Connect to Database
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -46,8 +46,8 @@ function get_week_info() {
     // (Dagen / 7) + 1 voor de eerste week
     $week_number = floor($days_since_start_monday / 7) + 1;
 
-    // Beperk tot maximaal 5 weken
-    $max_weeks = 5;
+    // Beperk tot maximaal 7 weken (7 trainers = 7 weeks round robin)
+    $max_weeks = 7;
     $week_number = min($week_number, $max_weeks);
 
     // 4. Bereken het datumbereik voor de bepaalde week
