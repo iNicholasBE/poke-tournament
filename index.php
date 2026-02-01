@@ -91,22 +91,28 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         <p>
             De wedstrijden voor deze week (<?= $week_start_date ?> t/m <?= $week_end_date ?>):
         </p>
-        
+
+        <?php if (isset($byes[$current_week])): ?>
+        <div class="bye-card">
+            😴 Deze week vrijaf: <strong><?= htmlspecialchars($byes[$current_week]) ?></strong>
+        </div>
+        <?php endif; ?>
+
         <?php
         $matches_sql = "SELECT * FROM matches WHERE week = ? ORDER BY id ASC";
         $stmt = $conn->prepare($matches_sql);
         $stmt->bind_param("i", $current_week);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result->num_rows == 0) {
              echo "<p style='text-align: center; margin-top: 20px;'>Geen matches gepland voor deze week. De competitie is mogelijk ten einde.</p>";
         }
 
         while($match = $result->fetch_assoc()):
             $status_color = $match['is_played'] ? 'green' : 'red';
-            $status_text = $match['is_played'] ? 
-                           "✅ GESPEELD: " . $match['p1_games_won'] . "-" . $match['p2_games_won'] . "" : 
+            $status_text = $match['is_played'] ?
+                           "✅ GESPEELD: " . $match['p1_games_won'] . "-" . $match['p2_games_won'] . "" :
                            "❌ OPEN";
         ?>
         <div class="schedule-card" style="border-color: <?= $status_color ?>;">
@@ -114,6 +120,25 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
             <small><?= $status_text ?></small>
         </div>
         <?php endwhile; $stmt->close(); ?>
+
+        <?php if ($current_week < 7): ?>
+        <div class="upcoming-section">
+            <h3>📅 Komende Weken</h3>
+            <?php for ($week = $current_week + 1; $week <= 7; $week++): ?>
+                <div class="upcoming-week">
+                    <h4>Week <?= $week ?></h4>
+                    <?php if (isset($byes[$week])): ?>
+                        <p class="upcoming-bye">😴 Vrijaf: <?= htmlspecialchars($byes[$week]) ?></p>
+                    <?php endif; ?>
+                    <ul>
+                        <?php foreach ($schedule[$week] as $matchup): ?>
+                            <li><?= htmlspecialchars($matchup[0]) ?> vs. <?= htmlspecialchars($matchup[1]) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endfor; ?>
+        </div>
+        <?php endif; ?>
 
     <?php elseif ($view == 'log_match'): ?>
         <h2>✅ Log Resultaat</h2>

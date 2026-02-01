@@ -89,8 +89,33 @@ Password: $NA!6qri2eQn7eoq
 Database: poketournament_
 ```
 
+## Migration Scripts
+
+Located in `/migrations/` folder:
+
+### end_season.sql
+Run at the end of each season to:
+1. Create archive tables (`archived_matches`, `archived_standings`) if they don't exist
+2. Copy all matches to `archived_matches` with season number
+3. Archive final standings with ranks, champion & magikarp flags
+4. Clear the `matches` table
+5. Reset all player stats to 0
+
+**Usage:**
+```sql
+-- Edit the season number first!
+SET @season_number = 1;
+-- Then run the script
+SOURCE migrations/end_season.sql;
+```
+
+### season2_setup.sql
+Adds new trainer PVG for Season 2.
+
 ## Development Notes
 
 - The schedule in `schedule_data.php` needs to be regenerated when adding/removing trainers
 - For 7 trainers, a full round-robin requires 7 weeks (each trainer plays 6 matches)
 - Each week has either 3 matches (one trainer has a bye) in a 7-player format
+- Update `LEAGUE_START_DATE` in config.php for each new season
+- Update the max weeks in config.php if trainer count changes

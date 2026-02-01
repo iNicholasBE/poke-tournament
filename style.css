@@ -146,6 +146,70 @@ h1, h2 {
     border-radius: 5px;
 }
 
+/* Bye Card */
+.bye-card {
+    background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 50%, #e0e0e0 100%);
+    border: 3px dashed var(--poke-blue);
+    padding: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Upcoming Matches Section */
+.upcoming-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 3px solid var(--poke-grey);
+}
+
+.upcoming-section h3 {
+    font-family: var(--poke-font);
+    color: var(--poke-blue);
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.upcoming-week {
+    background: var(--poke-grey);
+    border: 2px solid var(--poke-black);
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.upcoming-week h4 {
+    font-family: var(--poke-font);
+    font-size: 12px;
+    color: var(--poke-red);
+    margin: 0 0 8px 0;
+}
+
+.upcoming-bye {
+    font-size: 12px;
+    color: var(--poke-blue);
+    margin: 5px 0;
+    font-style: italic;
+}
+
+.upcoming-week ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.upcoming-week li {
+    padding: 5px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+}
+
+.upcoming-week li:last-child {
+    border-bottom: none;
+}
+
 /* Hall of Fame */
 .hall-of-fame {
     text-align: center;
