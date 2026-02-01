@@ -41,10 +41,10 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 
 <div class="container">
     <div class="nav-tabs">
-        <a href="?view=leaderboard" class="<?= $view == 'leaderboard' ? 'active' : '' ?>">🏆 Stand</a>
-        <a href="?view=schedule" class="<?= $view == 'schedule' ? 'active' : '' ?>">🗓️ Schema</a>
-        <a href="?view=log_match" class="<?= $view == 'log_match' ? 'active' : '' ?>">✅ Resultaat</a>
-        <a href="?view=hall_of_fame" class="<?= $view == 'hall_of_fame' ? 'active' : '' ?>">👑 Hall of Fame</a>
+        <a href="?view=leaderboard" class="<?= $view == 'leaderboard' ? 'active' : '' ?>">Stand</a>
+        <a href="?view=schedule" class="<?= $view == 'schedule' ? 'active' : '' ?>">Schema</a>
+        <a href="?view=log_match" class="<?= $view == 'log_match' ? 'active' : '' ?>">Resultaat</a>
+        <a href="?view=hall_of_fame" class="<?= $view == 'hall_of_fame' ? 'active' : '' ?>">Hall of Fame</a>
     </div>
 
     <?php if (isset($error) && $error !== null): ?>
@@ -54,7 +54,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
     <?php endif; ?>
 
     <?php if ($view == 'leaderboard'): ?>
-        <h2>🏆 Huidige Stand</h2>
+        <h2>Huidige Stand</h2>
         <div class="leaderboard">
             <?php 
             $leaderboard_sql = "SELECT *, (games_won - games_lost) AS game_diff FROM players ORDER BY points DESC, game_diff DESC, name ASC";
@@ -87,7 +87,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         </div>
 
     <?php elseif ($view == 'schedule'): ?>
-        <h2>🗓️ Week <?= $current_week ?> Speelschema</h2>
+        <h2>Week <?= $current_week ?> Speelschema</h2>
         <p>
             De wedstrijden voor deze week (<?= $week_start_date ?> t/m <?= $week_end_date ?>):
         </p>
@@ -123,7 +123,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
 
         <?php if ($current_week < 7): ?>
         <div class="upcoming-section">
-            <h3>📅 Komende Weken</h3>
+            <h3>Komende Weken</h3>
             <?php for ($week = $current_week + 1; $week <= 7; $week++): ?>
                 <div class="upcoming-week">
                     <h4>Week <?= $week ?></h4>
@@ -141,7 +141,7 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         <?php endif; ?>
 
     <?php elseif ($view == 'log_match'): ?>
-        <h2>✅ Log Resultaat</h2>
+        <h2>Log Resultaat</h2>
         <form method="POST">
             <div class="form-group">
                 <label for="match_id">Selecteer Match:</label>
@@ -180,17 +180,17 @@ $view = $_GET['view'] ?? 'leaderboard'; // Default view is leaderboard
         </form>
 
     <?php elseif ($view == 'hall_of_fame'): ?>
-        <h2>👑 Poké Tournament Champions</h2>
+        <h2>Hall of Fame</h2>
 
         <div class="hall-of-fame">
             <div class="season-block">
                 <h3>Season 1</h3>
                 <div class="champion-card">
-                    <div class="champion-title">🏆 Champion</div>
+                    <div class="champion-title">Champion</div>
                     <div class="champion-name">Nxken</div>
                 </div>
                 <div class="magikarp-card">
-                    <div class="magikarp-title">🐟 Magikarp Award</div>
+                    <div class="magikarp-title">Magikarp Award</div>
                     <div class="magikarp-name">P4ulfiction</div>
                 </div>
             </div>
