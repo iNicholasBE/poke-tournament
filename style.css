@@ -50,10 +50,10 @@
 
 body {
     font-family: var(--font-body);
-    background: var(--color-purple);
-    background-image:
-        radial-gradient(ellipse at center, var(--color-purple-light) 0%, transparent 70%),
-        linear-gradient(180deg, var(--color-purple) 0%, var(--color-black) 100%);
+    background-color: #5a7faa;
+    background-image: url('https://d1i787aglh9bmb.cloudfront.net/assets/img/me-expansions/me2dot5/decorations/multicolor-bg-L-2x.jpg');
+    background-size: cover;
+    background-position: center;
     background-attachment: fixed;
     color: var(--color-black);
     margin: 0;
@@ -63,25 +63,14 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Animated background pattern */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236C3688' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
-    pointer-events: none;
-    z-index: -1;
-}
-
 /* ===== HEADER & NAVIGATION ===== */
 header {
-    background: var(--tcgl-gradient);
+    background-color: #1a1a2e;
+    background-image: url('https://tcg.pokemon.com/assets/img/tcgl/header/header-fallback-large.jpg');
+    background-size: cover;
+    background-position: center;
     color: var(--color-white);
-    padding: 20px 15px;
+    padding: 30px 15px;
     text-align: center;
     border-bottom: 4px solid var(--gold);
     position: relative;
@@ -94,8 +83,9 @@ header::before {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--gold-gradient);
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    pointer-events: none;
 }
 
 header::after {
@@ -104,8 +94,8 @@ header::after {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%;
-    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+    height: 4px;
+    background: var(--gold-gradient);
     pointer-events: none;
 }
 
@@ -135,89 +125,59 @@ h2 {
 
 /* ===== MAIN CONTAINER ===== */
 .container {
-    max-width: 95%;
+    max-width: 900px;
     margin: 20px auto;
-    padding: 20px;
-    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray) 100%);
-    border: none;
-    border-radius: 16px;
-    box-shadow:
-        0 0 0 3px var(--gold),
-        0 0 0 6px var(--color-black),
-        0 20px 40px rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 4px solid var(--color-black);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     position: relative;
-}
-
-.container::before {
-    content: "";
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: var(--gold-gradient);
-    border-radius: 18px;
-    z-index: -1;
 }
 
 /* ===== NAVIGATION TABS ===== */
 .nav-tabs {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-bottom: 25px;
-    gap: 8px;
+    gap: 12px;
     flex-wrap: wrap;
+    padding: 0 10px;
 }
 
 .nav-tabs a {
-    flex: 1;
-    min-width: 80px;
+    flex: 0 1 auto;
+    min-width: 100px;
     text-align: center;
-    padding: 12px 8px;
-    background: linear-gradient(180deg, #e8e8e8 0%, #d0d0d0 100%);
-    border: 2px solid var(--color-black);
-    border-radius: 8px;
+    padding: 14px 24px;
+    background: var(--color-white);
+    border: 3px solid var(--color-black);
+    border-radius: 50px;
     text-decoration: none;
     color: var(--color-black);
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
+    letter-spacing: 1px;
+    transition: all 0.15s ease;
     position: relative;
-    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.nav-tabs a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, var(--gold-btn) 0%, var(--gold-dark) 100%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.nav-tabs a span,
-.nav-tabs a {
-    position: relative;
-    z-index: 1;
-}
-
-.nav-tabs a.active,
 .nav-tabs a:hover {
-    color: var(--color-black);
-    border-color: var(--gold-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(222, 175, 79, 0.4);
+    background: var(--color-gray);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.nav-tabs a.active::before,
-.nav-tabs a:hover::before {
-    opacity: 1;
+.nav-tabs a.active {
+    background: linear-gradient(180deg, #f7d35c 0%, #e8b82e 100%);
+    border-color: var(--gold-dark);
+    color: var(--color-black);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* ===== LEADERBOARD TABLE ===== */
@@ -631,14 +591,21 @@ button span {
         min-width: 70px;
     }
 
+    .nav-tabs {
+        gap: 8px;
+    }
+
     .nav-tabs a {
         font-size: 11px;
-        padding: 10px 6px;
+        padding: 10px 16px;
+        min-width: auto;
+        flex: 1 1 calc(50% - 8px);
     }
 
     .container {
         margin: 10px;
         padding: 15px;
+        border-radius: 16px;
     }
 }
 
